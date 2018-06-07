@@ -1,4 +1,4 @@
-#¡Bienvenidos al Curso de .NET!
+# ¡Bienvenidos al Curso de .NET!
 
 Este curso se imparte con la finalidad de compartir el conocimiento adquirido durante estos pocos años de desarrollador, si algo podemos ayudarte, contactame con gusto
 
