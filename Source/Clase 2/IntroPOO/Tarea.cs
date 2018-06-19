@@ -43,6 +43,7 @@ namespace IntroPOO
 
         public bool PosponerTarea(int cantidadDeDias)
         {
+            Random
             DateTime posibleFecha = FechaHora.AddDays(cantidadDeDias);
 
             if (posibleFecha.DayOfWeek == DayOfWeek.Sunday)

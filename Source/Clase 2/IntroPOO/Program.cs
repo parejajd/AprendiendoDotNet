@@ -24,7 +24,6 @@ namespace IntroPOO
             tarea2.FechaHora = DateTime.Now.AddDays(1);
             tarea2.TiempoEjecucion = 1;
 
-
             bool sePudoPosponer = tarea2.PosponerTarea(6);
 
             if (sePudoPosponer == true)
