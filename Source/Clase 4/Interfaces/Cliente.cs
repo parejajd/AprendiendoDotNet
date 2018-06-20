@@ -10,19 +10,27 @@ namespace Interfaces
 
         public override bool Login(string usuario, string contraseña)
         {
-            //Verificar si existe, si true
-            //Abrir un archivo
-            //buscar el nombre de usuario y la contraseña en el archivo
-            //si existe retornar true, si no, retornar false.
-            string ruta = @"D:\Workspaces\CursoDotNet\Source\Clase 4\Interfaces\Archivos\Empleados.txt";
+            string ruta = @"D:\Workspaces\CursoDotNet\Source\Clase 4\Interfaces\Archivos\Clientes.txt";
+            bool logueado = false;
             if (File.Exists(ruta))
             {
                 StreamReader reader = File.OpenText(ruta);
-                string contenido = reader.ReadToEnd();
+                string linea;
+
+                while ((linea = reader.ReadLine()) != null)
+                {
+                    string[] datos = linea.Split(';');
+
+                    if (datos[0].Equals(usuario) && datos[1].Equals(contraseña))
+                    {
+                        logueado = true;
+                        break;
+                    }
+                }
                 reader.Close();
             }
 
-            return true;
+            return logueado;
         }
     }
 }
