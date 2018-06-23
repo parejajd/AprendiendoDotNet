@@ -3,7 +3,7 @@ using System.IO; //Manejo de archivos
 
 namespace Interfaces
 {
-    class Empleado : Persona
+    class Empleado : Persona, ILogueable
     {
         public double Salario { get; }
 
@@ -39,6 +39,12 @@ namespace Interfaces
             }
 
             return logueado;
+        }
+
+        public void Log(string datos)
+        {
+            //Registrar en la bitácora de eventos
+            Console.WriteLine($"se registro el evento {datos}");
         }
     }
 }

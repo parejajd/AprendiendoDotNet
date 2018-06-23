@@ -11,7 +11,6 @@ namespace POOIntro
 
             Cuadrado cuadro = new Cuadrado(lado);
 
-
             Rectangulo rectangulo = new Rectangulo(10, 5);
 
             Console.Write("Ingrese el tamaño del lado del cubo:");
@@ -37,7 +36,7 @@ namespace POOIntro
 
         public static void ImprimirArea(FiguraGeometrica figura)
         {
-            Console.WriteLine($"El area del {figura.GetType().Name}es {figura.CalcularArea()}");
+            Console.WriteLine($"El area del {figura.GetType().Name} es {figura.CalcularArea()}");
         }
     }
 }
