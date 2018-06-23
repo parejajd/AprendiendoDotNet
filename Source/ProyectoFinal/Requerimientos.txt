@@ -1,0 +1,14 @@
+Crear un sistema de gestión de tareas.
+
+-Debe guardar el nombre de la actividad, fecha de vencimiento, descripción, estado, tiempo de recordatorio, a que proyecto pertenece, prioridad.
+
+Requerimientos:
+1. Mostrar Bienvenida!.
+2. Menu
+3. Ver las tareas
+	3.1 Modificar
+	3.2 Eliminar
+4. Crear Tareas
+5. Ver las tareas vencidas
+
+Todo lo almacenar en un archivo de texto.
