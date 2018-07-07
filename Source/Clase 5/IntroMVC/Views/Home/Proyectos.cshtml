@@ -1,0 +1,22 @@
+@model IntroMVC.Reporte
+
+
+<h2>Proyectos del usuario @Model.Usuario.NombreCompleto</h2>    
+<br>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Id</td>
+        <td>Nombre</td>
+        <td>Descripcion</td>
+    </tr>
+
+    @foreach(var proyecto in Model.Proyectos)
+    {
+        <tr>    
+            <td>@proyecto.Id</td>
+            <td>@proyecto.Nombre</td>
+            <td>@proyecto.Descripcion</td>
+        </tr>
+    }
+</table>

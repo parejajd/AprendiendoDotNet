@@ -1,0 +1,43 @@
+﻿@model List<Tasker.Web.Models.MyTask>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Listado de tareas</h2>
+
+<a asp-action="New">Nueva Tarea</a>
+
+<br /><br />
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Nombre de la tarea</td>
+            <td>Descripcion de la tarea</td>
+            <td>Fecha de vencimiento</td>
+            <td>Opciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        <!--C# Razor-->
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.MyTaskId</td>
+                <td>@task.Name</td>
+                <td>@task.Description</td>
+                <td>@task.DueDate.ToString()</td>
+                <td>
+                    <a asp-action="View" asp-controller="Task" asp-route-id="@task.MyTaskId" class="btn btn-success">Ver detalle</a>
+
+                    <a asp-action="Edit" asp-controller="Task" asp-route-id="@task.MyTaskId" class="btn btn-warning">Editar</a>
+
+                    <a asp-action="Delete" asp-controller="Task" asp-route-id="@task.MyTaskId" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
