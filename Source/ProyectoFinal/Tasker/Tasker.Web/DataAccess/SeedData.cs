@@ -24,14 +24,12 @@ namespace Tasker.Web.DataAccess
                     context.Tasks.AddRange(
                         new MyTask
                         {
-                            MyTaskId = 1,
                             Name = "Preparar mas café",
                             Description = "Es necesario comprar mas café para el proximo sabado",
                             DueDate = new DateTime(2018, 8, 15)
                         },
                         new MyTask
                         {
-                            MyTaskId = 2,
                             Name = "Preparar Pan",
                             Description = "Es necesario comprar mas pan para el proximo sabado",
                             DueDate = new DateTime(2018, 8, 15)

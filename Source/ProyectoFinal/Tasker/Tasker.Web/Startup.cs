@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tasker.Web.DataAccess;
+using Tasker.Web.DataAccess.Repository;
 
 namespace Tasker.Web
 {
@@ -29,8 +30,14 @@ namespace Tasker.Web
 
             //Configura la clase encargada de la gestión de datos
             //InMemory = Usamos una base de datos en memoria
+            //services.AddDbContext<TaskerDbContext>(options =>
+            //                        options.UseInMemoryDatabase("TaskerDB"));
+
             services.AddDbContext<TaskerDbContext>(options =>
-                                    options.UseInMemoryDatabase("TaskerDB"));
+                                    options.UseSqlServer(Configuration.GetConnectionString("TaskerDB")));
+
+            //Le indica al controlador que cuando se llame la interfaz, cree un objeto de la clase
+            services.AddTransient<ITaskRepository, TaskRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

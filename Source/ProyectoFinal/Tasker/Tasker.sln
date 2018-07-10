@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasker.Web", "Tasker.Web\Tasker.Web.csproj", "{0BA3780B-995C-4DDC-BDC3-D4CD4A7FA756}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasker.Web", "Tasker.Web\Tasker.Web.csproj", "{0BA3780B-995C-4DDC-BDC3-D4CD4A7FA756}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasker.Web.Test", "Tasker.Web.Test\Tasker.Web.Test.csproj", "{3465BD16-B428-4135-BF34-9168FCB2E959}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0BA3780B-995C-4DDC-BDC3-D4CD4A7FA756}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BA3780B-995C-4DDC-BDC3-D4CD4A7FA756}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BA3780B-995C-4DDC-BDC3-D4CD4A7FA756}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3465BD16-B428-4135-BF34-9168FCB2E959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3465BD16-B428-4135-BF34-9168FCB2E959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3465BD16-B428-4135-BF34-9168FCB2E959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3465BD16-B428-4135-BF34-9168FCB2E959}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

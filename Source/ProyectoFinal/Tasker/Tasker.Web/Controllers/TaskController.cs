@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Tasker.Web.DataAccess;
+using Tasker.Web.DataAccess.Repository;
 using Tasker.Web.Models;
 
 namespace Tasker.Web.Controllers
 {
     public class TaskController : Controller
     {
-        private readonly TaskerDbContext _db;
+        private readonly ITaskRepository _taskRepository;
 
-        public TaskController(TaskerDbContext db)
+        public TaskController(ITaskRepository taskRepository)
         {
-            this._db = db;
+            this._taskRepository = taskRepository;
         }
 
         public IActionResult Index()
         {
             //Obtenga el listado de tareas
             // SELECT * FROM MyTask
-            var taskList = _db.Tasks.ToList();
+            var taskList = this._taskRepository.Tasks;
 
             //Enviamos los datos a la Vista
             return View(taskList);
@@ -35,13 +35,9 @@ namespace Tasker.Web.Controllers
         [HttpPost]
         public IActionResult New(MyTask task)
         {
-            //SELECT Max(MyTaskId) FROM MyTaskId 
-            int actualId = _db.Tasks.Max(x => x.MyTaskId);
-            task.MyTaskId = actualId + 1;
-            _db.Tasks.Add(task);
             try
             {
-                if (_db.SaveChanges() > 0)
+                if (this._taskRepository.Add(task))
                 {
                     return RedirectToAction("Index");
                 }
@@ -62,7 +58,7 @@ namespace Tasker.Web.Controllers
         public IActionResult Edit(int id)
         {
             //SELECT TOP 1 * FROM MyTask WHERE MyTaskId=id
-            var task = _db.Tasks.FirstOrDefault(x => x.MyTaskId == id);
+            var task = this._taskRepository.Tasks.FirstOrDefault(x => x.MyTaskId == id);
 
             return View(task);
         }
@@ -70,24 +66,9 @@ namespace Tasker.Web.Controllers
         [HttpPost]
         public IActionResult Edit(MyTask task)
         {
-            var oldTask = _db.Tasks.FirstOrDefault(x => x.MyTaskId == task.MyTaskId);
-
-            //Solo voy a cambiar el nombre, ustedes pueden cambiar lo demas
-            oldTask.Name = task.Name;
-            oldTask.Description = task.Description;
-            oldTask.DueDate = task.DueDate;
-            oldTask.IsCompleted = task.IsCompleted;
-
-            if (task.IsCompleted)
-            {
-                oldTask.CompletedDate = DateTime.Now;
-            }
-
-            oldTask.ModificationDate = DateTime.Now;
-
             try
             {
-                if (_db.SaveChanges() > 0)
+                if (this._taskRepository.Update(task.MyTaskId, task))
                 {
                     return RedirectToAction("Index");
                 }
@@ -107,14 +88,14 @@ namespace Tasker.Web.Controllers
 
         public IActionResult View(int id)
         {
-            var task = _db.Tasks.FirstOrDefault(x => x.MyTaskId == id);
+            var task = this._taskRepository.Tasks.FirstOrDefault(x => x.MyTaskId == id);
 
             return View(task);
         }
 
         public IActionResult Delete(int id)
         {
-            var task = _db.Tasks.FirstOrDefault(x => x.MyTaskId == id);
+            var task = this._taskRepository.Tasks.FirstOrDefault(x => x.MyTaskId == id);
 
             return View(task);
         }
@@ -122,13 +103,9 @@ namespace Tasker.Web.Controllers
         [HttpPost]
         public IActionResult Delete(MyTask task)
         {
-            var deletingTask = _db.Tasks.FirstOrDefault(x => x.MyTaskId == task.MyTaskId);
-
-            _db.Tasks.Remove(deletingTask);
-
             try
             {
-                if (_db.SaveChanges() > 0)
+                if (this._taskRepository.Delete(task.MyTaskId))
                 {
                     return RedirectToAction("Index");
                 }
@@ -142,7 +119,7 @@ namespace Tasker.Web.Controllers
             {
                 ViewData["Error"] = "No se guardaron los datos consulte con el admin";
                 return View();
-            } 
+            }
         }
     }
 }
