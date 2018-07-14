@@ -7,19 +7,19 @@ using Tasker.Web.Models;
 
 namespace Tasker.Web.DataAccess.Repository
 {
-    public class TaskRepository : ITaskRepository
+    public class TaskRepository : BaseRepository, ITaskRepository
     {
-        private readonly TaskerDbContext Context;
-
-        public TaskRepository(TaskerDbContext context)  
+        public TaskRepository(TaskerDbContext context) : base(context)
         {
-            this.Context = context;
         }
 
-        public List<MyTask> Tasks { get => this.Context.Tasks
-                                                        .Include(x=>x.Project)
-                                                        .Include(x=>x.CreatedBy)
-                                                        .Include(x=>x.AssignedPerson).ThenInclude(y=>y.Person).ToList(); }
+        public List<MyTask> Tasks
+        {
+            get => this.Context.Tasks
+                                .Include(x => x.Project)
+                                .Include(x => x.CreatedBy)
+                                .Include(x => x.AssignedPerson).ThenInclude(y => y.Person).ToList();
+        }
 
         public bool Add(MyTask task)
         {

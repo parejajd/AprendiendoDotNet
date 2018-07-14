@@ -6,23 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Tasker.Web.DataAccess;
+using Tasker.Web.DataAccess.Repository;
 using Tasker.Web.Models;
 
 namespace Tasker.Web.Controllers
 {
     public class PeopleController : Controller
     {
-        private readonly TaskerDbContext _context;
+        private readonly IPeopleRepository _peopleRepository;
 
-        public PeopleController(TaskerDbContext context)
+        public PeopleController(IPeopleRepository peopleRepository)
         {
-            _context = context;
+            _peopleRepository = peopleRepository;
         }
 
         // GET: People
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Person.ToListAsync());
+            return View(this._peopleRepository.Person);
         }
 
         // GET: People/Details/5
@@ -33,8 +34,8 @@ namespace Tasker.Web.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
-                .FirstOrDefaultAsync(m => m.PersonId == id);
+            var person = this._peopleRepository.Person.FirstOrDefault(x => x.PersonId == id);
+
             if (person == null)
             {
                 return NotFound();
@@ -58,8 +59,7 @@ namespace Tasker.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(person);
-                await _context.SaveChangesAsync();
+                this._peopleRepository.Add(person);
                 return RedirectToAction(nameof(Index));
             }
             return View(person);
@@ -73,7 +73,7 @@ namespace Tasker.Web.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person.FindAsync(id);
+            var person = this._peopleRepository.Person.FirstOrDefault(x => x.PersonId == id);
             if (person == null)
             {
                 return NotFound();
@@ -97,8 +97,7 @@ namespace Tasker.Web.Controllers
             {
                 try
                 {
-                    _context.Update(person);
-                    await _context.SaveChangesAsync();
+                    this._peopleRepository.Update(id, person);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,8 +123,7 @@ namespace Tasker.Web.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
-                .FirstOrDefaultAsync(m => m.PersonId == id);
+            var person = this._peopleRepository.Person.FirstOrDefault(x => x.PersonId == id);
             if (person == null)
             {
                 return NotFound();
@@ -139,15 +137,13 @@ namespace Tasker.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var person = await _context.Person.FindAsync(id);
-            _context.Person.Remove(person);
-            await _context.SaveChangesAsync();
+            this._peopleRepository.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool PersonExists(int id)
         {
-            return _context.Person.Any(e => e.PersonId == id);
+            return this._peopleRepository.Person.Any(e => e.PersonId == id);
         }
     }
 }
