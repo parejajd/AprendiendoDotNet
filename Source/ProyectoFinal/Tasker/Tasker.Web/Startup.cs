@@ -38,6 +38,7 @@ namespace Tasker.Web
 
             //Le indica al controlador que cuando se llame la interfaz, cree un objeto de la clase
             services.AddTransient<ITaskRepository, TaskRepository>();
+           
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

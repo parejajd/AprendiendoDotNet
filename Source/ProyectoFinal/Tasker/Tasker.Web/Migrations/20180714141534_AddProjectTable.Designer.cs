@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tasker.Web.DataAccess;
 
 namespace Tasker.Web.Migrations
 {
     [DbContext(typeof(TaskerDbContext))]
-    partial class TaskerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180714141534_AddProjectTable")]
+    partial class AddProjectTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,6 @@ namespace Tasker.Web.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("CompletedDate");
-
-                    b.Property<int>("CreatedById");
 
                     b.Property<DateTime>("CreationDate");
 
@@ -45,46 +45,9 @@ namespace Tasker.Web.Migrations
 
                     b.HasKey("MyTaskId");
 
-                    b.HasIndex("CreatedById");
-
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("Tasker.Web.Models.Person", b =>
-                {
-                    b.Property<int>("PersonId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.HasKey("PersonId");
-
-                    b.ToTable("Person");
-                });
-
-            modelBuilder.Entity("Tasker.Web.Models.PersonTasks", b =>
-                {
-                    b.Property<int>("MyTaskId");
-
-                    b.Property<int>("PersonId");
-
-                    b.HasKey("MyTaskId", "PersonId")
-                        .HasName("PK_PersonTasks");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonTasks");
                 });
 
             modelBuilder.Entity("Tasker.Web.Models.Project", b =>
@@ -102,27 +65,9 @@ namespace Tasker.Web.Migrations
 
             modelBuilder.Entity("Tasker.Web.Models.MyTask", b =>
                 {
-                    b.HasOne("Tasker.Web.Models.Person", "CreatedBy")
-                        .WithMany("CreatedByMe")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Tasker.Web.Models.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Tasker.Web.Models.PersonTasks", b =>
-                {
-                    b.HasOne("Tasker.Web.Models.MyTask", "MyTask")
-                        .WithMany("AssignedPerson")
-                        .HasForeignKey("MyTaskId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Tasker.Web.Models.Person", "Person")
-                        .WithMany("AssignedToMe")
-                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

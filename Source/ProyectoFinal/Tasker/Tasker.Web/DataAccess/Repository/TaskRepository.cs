@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,10 @@ namespace Tasker.Web.DataAccess.Repository
             this.Context = context;
         }
 
-        public List<MyTask> Tasks { get => this.Context.Tasks.ToList(); }
+        public List<MyTask> Tasks { get => this.Context.Tasks
+                                                        .Include(x=>x.Project)
+                                                        .Include(x=>x.CreatedBy)
+                                                        .Include(x=>x.AssignedPerson).ThenInclude(y=>y.Person).ToList(); }
 
         public bool Add(MyTask task)
         {

@@ -15,5 +15,13 @@ namespace Tasker.Web.Models
         public DateTime DueDate { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime? CompletedDate { get; set; }
+
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
+
+        public int CreatedById { get; set; }
+        public Person CreatedBy { get; set; }
+
+        public IEnumerable<PersonTasks> AssignedPerson { get; set; }
     }
 }

@@ -16,6 +16,9 @@
             <td>Id</td>
             <td>Nombre de la tarea</td>
             <td>Descripcion de la tarea</td>
+            <td>Estado</td>
+            <td>Creador</td>
+            <td>Responsables</td>
             <td>Fecha de vencimiento</td>
             <td>Opciones</td>
         </tr>
@@ -28,6 +31,16 @@
                 <td>@task.MyTaskId</td>
                 <td>@task.Name</td>
                 <td>@task.Description</td>
+                <td>@(task.IsCompleted ? "Completada en " + task.CompletedDate : "Pendiente")</td>
+                <td>@task.CreatedBy.FirstName</td>
+                <td>
+                    <ul>
+                        @foreach (var person in task.AssignedPerson)
+                        {
+                            <li>@person.Person.FirstName</li>
+                        }
+                    </ul>
+                </td>
                 <td>@task.DueDate.ToString()</td>
                 <td>
                     <a asp-action="View" asp-controller="Task" asp-route-id="@task.MyTaskId" class="btn btn-success">Ver detalle</a>
