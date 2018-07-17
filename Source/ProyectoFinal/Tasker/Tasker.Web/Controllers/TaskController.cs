@@ -11,17 +11,19 @@ namespace Tasker.Web.Controllers
     public class TaskController : Controller
     {
         private readonly ITaskRepository _taskRepository;
+        private readonly IPeopleRepository _peopleRepository;
 
-        public TaskController(ITaskRepository taskRepository)
+        public TaskController(ITaskRepository taskRepository, IPeopleRepository peopleRepository)
         {
             this._taskRepository = taskRepository;
+            this._peopleRepository = peopleRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
             //Obtenga el listado de tareas
-            // SELECT * FROM MyTask
-            var taskList = this._taskRepository.Tasks;
+            // SELECT * FROM MyTask WHERE ProjectId=id
+            List<MyTask> taskList = this._taskRepository.Tasks.Where(x => x.ProjectId == id).ToList();
 
             //Enviamos los datos a la Vista
             return View(taskList);
@@ -29,6 +31,8 @@ namespace Tasker.Web.Controllers
 
         public IActionResult New()
         {
+            ViewData["ProjectList"] = this._taskRepository.Projects.ToList();
+            ViewData["PersonList"] = this._peopleRepository.Person.ToList();
             return View();
         }
 
@@ -37,9 +41,10 @@ namespace Tasker.Web.Controllers
         {
             try
             {
+                task.CreatedById = 1; //Temporal mientras implementamos el login
                 if (this._taskRepository.Add(task))
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { id = task.ProjectId });
                 }
                 else
                 {
@@ -59,7 +64,8 @@ namespace Tasker.Web.Controllers
         {
             //SELECT TOP 1 * FROM MyTask WHERE MyTaskId=id
             var task = this._taskRepository.Tasks.FirstOrDefault(x => x.MyTaskId == id);
-
+            ViewData["ProjectList"] = this._taskRepository.Projects.ToList();
+            ViewData["PersonList"] = this._peopleRepository.Person.ToList();
             return View(task);
         }
 

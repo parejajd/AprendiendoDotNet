@@ -1,52 +1,61 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/favicon.ico">
+
     <title>@ViewData["Title"] - Tasker.Web</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/dashboard.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/dashboard.min.css" asp-append-version="true" />
     </environment>
+
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Tasker.Web</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+       <partial name="_HeaderPartial" />
     </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                  @await Component.InvokeAsync("LateralMenu")
+                </div>
+            </nav>
 
-    <partial name="_CookieConsentPartial" />
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <button class="btn btn-sm btn-outline-secondary">Share</button>
+                            <button class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <span data-feather="calendar"></span>
+                            This week
+                        </button>
+                    </div>
+                </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Tasker.Web</p>
-        </footer>
+                @RenderBody()
+
+            </main>
+        </div>
+
     </div>
+
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -69,6 +78,10 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @RenderSection("Scripts", required: false)
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace()
+    </script>
 </body>
 </html>

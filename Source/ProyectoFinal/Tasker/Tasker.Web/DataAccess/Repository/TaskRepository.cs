@@ -21,6 +21,11 @@ namespace Tasker.Web.DataAccess.Repository
                                 .Include(x => x.AssignedPerson).ThenInclude(y => y.Person).ToList();
         }
 
+        public List<Project> Projects
+        {
+            get => this.Context.Projects.Include(x=>x.Tasks).ToList();
+        }
+
         public bool Add(MyTask task)
         {
             this.Context.Tasks.Add(task);

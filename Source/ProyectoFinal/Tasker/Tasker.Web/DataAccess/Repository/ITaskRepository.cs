@@ -8,6 +8,8 @@ namespace Tasker.Web.DataAccess.Repository
 {
     public interface ITaskRepository
     {
+        List<Project> Projects { get; }
+
         List<MyTask> Tasks { get; }
 
         bool Add(MyTask task);
