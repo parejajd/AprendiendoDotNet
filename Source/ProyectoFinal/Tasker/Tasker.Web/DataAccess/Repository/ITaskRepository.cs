@@ -14,6 +14,8 @@ namespace Tasker.Web.DataAccess.Repository
 
         bool Add(MyTask task);
 
+        bool AddProject(Project project);
+
         bool Update(int taskId, MyTask updatedTask);
 
         bool Delete(int taskId);

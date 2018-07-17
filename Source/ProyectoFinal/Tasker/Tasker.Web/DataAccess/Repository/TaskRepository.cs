@@ -23,13 +23,19 @@ namespace Tasker.Web.DataAccess.Repository
 
         public List<Project> Projects
         {
-            get => this.Context.Projects.Include(x=>x.Tasks).ToList();
+            get => this.Context.Projects.Include(x => x.Tasks).ToList();
         }
 
         public bool Add(MyTask task)
         {
             this.Context.Tasks.Add(task);
 
+            return this.Context.SaveChanges() > 0;
+        }
+
+        public bool AddProject(Project project)
+        {
+            this.Context.Projects.Add(project);
             return this.Context.SaveChanges() > 0;
         }
 

@@ -60,6 +60,23 @@ namespace Tasker.Web.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult NewProject(string ProjectName)
+        {
+            try
+            {
+                var project = new Project { ProjectName = ProjectName };
+                this._taskRepository.AddProject(project);
+                return PartialView("_ProjectList");
+            }
+            catch (Exception)
+            {
+                ViewData["Error"] = "No se guardaron los datos consulte con el admin";
+                return View();
+            }
+
+        }
+
         public IActionResult Edit(int id)
         {
             //SELECT TOP 1 * FROM MyTask WHERE MyTaskId=id
