@@ -1,12 +1,24 @@
-﻿@model List<Tasker.Web.Models.MyTask>
+﻿@model Tasker.Web.ViewModels.TasksListViewModel
 
-@{
-    ViewData["Title"] = "Index";
-}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">@Model.CurrentProject.ProjectName</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button>
+    </div>
+</div>
+
 
 <h2>Listado de tareas</h2>
 
-<a asp-action="New">Nueva Tarea</a>
+<a asp-action="New" asp-route-projectId="@Model.CurrentProject.ProjectId">Nueva Tarea</a>
 
 <br /><br />
 
@@ -25,7 +37,7 @@
     </thead>
     <tbody>
         <!--C# Razor-->
-        @foreach (var task in Model)
+        @foreach (var task in Model.Tasks)
         {
             <tr>
                 <td>@task.MyTaskId</td>

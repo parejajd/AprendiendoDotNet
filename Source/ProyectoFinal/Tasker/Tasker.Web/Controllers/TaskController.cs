@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tasker.Web.DataAccess.Repository;
 using Tasker.Web.Models;
+using Tasker.Web.ViewModels;
 
 namespace Tasker.Web.Controllers
 {
@@ -24,16 +25,26 @@ namespace Tasker.Web.Controllers
             //Obtenga el listado de tareas
             // SELECT * FROM MyTask WHERE ProjectId=id
             List<MyTask> taskList = this._taskRepository.Tasks.Where(x => x.ProjectId == id).ToList();
+            Project project = this._taskRepository.Projects.FirstOrDefault(x => x.ProjectId == id);
+
+            var model = new TasksListViewModel
+            {
+                CurrentProject = project,
+                Tasks = taskList
+            };
 
             //Enviamos los datos a la Vista
-            return View(taskList);
+            return View(model);
         }
 
-        public IActionResult New()
+        public IActionResult New(int projectId)
         {
             ViewData["ProjectList"] = this._taskRepository.Projects.ToList();
             ViewData["PersonList"] = this._peopleRepository.Person.ToList();
-            return View();
+
+            var task = new MyTask { ProjectId = projectId };
+
+            return View(task);
         }
 
         [HttpPost]

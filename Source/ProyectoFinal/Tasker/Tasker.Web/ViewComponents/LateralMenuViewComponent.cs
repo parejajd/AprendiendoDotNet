@@ -19,6 +19,7 @@ namespace Tasker.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+
             var projectList = _taskRepository.Projects;
             return View(projectList);
         }
