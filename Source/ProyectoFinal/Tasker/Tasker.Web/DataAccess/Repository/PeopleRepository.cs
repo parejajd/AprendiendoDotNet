@@ -36,6 +36,8 @@ namespace Tasker.Web.DataAccess.Repository
             oldPerson.LastName = updatedPerson.LastName;
             oldPerson.PhoneNumber = updatedPerson.PhoneNumber;
             oldPerson.Email = updatedPerson.Email;
+            oldPerson.Address = updatedPerson.Address;
+            oldPerson.BirthDay = updatedPerson.BirthDay;
 
             return Context.SaveChanges() > 0;
         }

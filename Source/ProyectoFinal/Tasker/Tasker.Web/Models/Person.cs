@@ -25,12 +25,11 @@ namespace Tasker.Web.Models
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        [Required]
         public string Address { get; set; }
+        public DateTime? BirthDay { get; set; }
 
         public IEnumerable<MyTask> CreatedByMe { get; set; }
 
         public IEnumerable<PersonTasks> AssignedToMe { get; set; }
-
     }
 }
