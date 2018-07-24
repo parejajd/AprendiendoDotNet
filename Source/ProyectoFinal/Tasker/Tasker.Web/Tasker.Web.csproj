@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="1.0.113" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tasker.DataAccess\Tasker.DataAccess.csproj" />
+    <ProjectReference Include="..\Tasker.Models\Tasker.Models.csproj" />
+    <ProjectReference Include="..\Tasker.Services\Tasker.Services.csproj" />
+  </ItemGroup>
+
 </Project>

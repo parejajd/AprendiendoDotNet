@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Tasker.Web.DataAccess.Repository;
-using Tasker.Web.Models;
+using Tasker.Services;
+using Tasker.Models;
 using Tasker.Web.ViewModels;
 
 namespace Tasker.Web.Controllers

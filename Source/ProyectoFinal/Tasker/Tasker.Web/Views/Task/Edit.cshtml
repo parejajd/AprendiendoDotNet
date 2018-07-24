@@ -1,4 +1,4 @@
-﻿@model Tasker.Web.Models.MyTask
+﻿@model Tasker.Models.MyTask
 
 @{
     ViewData["Title"] = "Edit";
@@ -33,7 +33,7 @@
                 <label asp-for="ProjectId">Proyecto</label>
 
                 <select asp-for="ProjectId" class="form-control">
-                    @foreach (var project in (List<Project>)ViewData["ProjectList"])
+                    @foreach (var project in (List<Tasker.Models.Project>)ViewData["ProjectList"])
                     {
                         <option value="@project.ProjectId">@project.ProjectName</option>
                     }

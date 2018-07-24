@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Tasker.Web.Models;
+using Tasker.Models;
+using Tasker.DataAccess;
 
-namespace Tasker.Web.DataAccess.Repository
+namespace Tasker.Services
 {
     public class TaskRepository : BaseRepository, ITaskRepository
     {

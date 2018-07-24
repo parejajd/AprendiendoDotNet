@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tasker.DataAccess;
 
-namespace Tasker.Web.DataAccess.Repository
+namespace Tasker.Services
 {
     public class BaseRepository
     {

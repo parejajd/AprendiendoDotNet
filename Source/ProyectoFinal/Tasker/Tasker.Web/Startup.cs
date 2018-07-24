@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Tasker.Web.DataAccess;
-using Tasker.Web.DataAccess.Repository;
+using Tasker.DataAccess;
+using Tasker.Services;
 
 namespace Tasker.Web
 {

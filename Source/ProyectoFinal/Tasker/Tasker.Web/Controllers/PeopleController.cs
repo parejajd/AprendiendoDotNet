@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Tasker.Web.DataAccess;
-using Tasker.Web.DataAccess.Repository;
-using Tasker.Web.Models;
+using Tasker.Services;
+using Tasker.Models;
 
 namespace Tasker.Web.Controllers
 {
