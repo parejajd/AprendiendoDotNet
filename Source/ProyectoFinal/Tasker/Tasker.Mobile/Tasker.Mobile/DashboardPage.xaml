@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<TabbedPage
+    x:Class="Tasker.Mobile.DashboardPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Tasker.Mobile;assembly=Tasker.Mobile">
+    <!--  Pages can be added as references or inline  -->
+
+    <NavigationPage x:Name="TareasPages" Title="Mis Tareas">
+        <x:Arguments>
+            <local:TasksPage />
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Title="Proyectos">
+        <x:Arguments>
+            <local:ProjectsPage />
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Title="Mi Perfil">
+        <x:Arguments>
+            <local:ProfilePage />
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>

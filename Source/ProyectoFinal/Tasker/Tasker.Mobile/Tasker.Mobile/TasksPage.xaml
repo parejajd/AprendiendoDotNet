@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Tasker.Mobile.TasksPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <StackLayout Orientation="Horizontal">
+            <Label
+                FontSize="Medium"
+                HorizontalOptions="CenterAndExpand"
+                Text="este es un texto un poco mas largo que los otros"
+                TextColor="Red"
+                VerticalOptions="Start" />
+
+            <Label
+                FontSize="Small"
+                HorizontalOptions="CenterAndExpand"
+                Text="Mis tareas 1"
+                TextColor="Blue"
+                VerticalOptions="Center" />
+
+            <Label
+                FontSize="Small"
+                HorizontalOptions="CenterAndExpand"
+                Text="Mis tareas 2"
+                TextColor="Yellow"
+                VerticalOptions="Center" />
+
+            <Label
+                FontSize="Small"
+                HorizontalOptions="CenterAndExpand"
+                Text="Mis tareas 3"
+                TextColor="Black"
+                VerticalOptions="End" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
