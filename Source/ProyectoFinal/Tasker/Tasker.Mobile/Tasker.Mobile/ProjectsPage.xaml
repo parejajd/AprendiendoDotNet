@@ -4,11 +4,27 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Orientation="Vertical">
             <Label
+                HorizontalOptions="Center"
+                Text="Mis Proyectos"
+                VerticalOptions="Start" />
+            <ListView
+                x:Name="ListaDeProyectos"
                 HorizontalOptions="CenterAndExpand"
-                Text="Lista de proyectos"
-                VerticalOptions="CenterAndExpand" />
+                VerticalOptions="Start">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding ProjectName}" TextColor="Blue" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button
+                x:Name="Refresh"
+                Clicked="Refresh_Clicked"
+                HorizontalOptions="Center"
+                Text="Refrescar desde la web"
+                VerticalOptions="End" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

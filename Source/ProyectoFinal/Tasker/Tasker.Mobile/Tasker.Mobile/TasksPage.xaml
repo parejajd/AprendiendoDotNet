@@ -4,33 +4,26 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Content>
-        <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Vertical">
             <Label
-                FontSize="Medium"
-                HorizontalOptions="CenterAndExpand"
-                Text="este es un texto un poco mas largo que los otros"
-                TextColor="Red"
+                HorizontalOptions="Center"
+                Text="Mis tareas"
                 VerticalOptions="Start" />
-
-            <Label
-                FontSize="Small"
+            <ListView
+                x:Name="ListaDeTareas"
                 HorizontalOptions="CenterAndExpand"
-                Text="Mis tareas 1"
-                TextColor="Blue"
-                VerticalOptions="Center" />
-
-            <Label
-                FontSize="Small"
-                HorizontalOptions="CenterAndExpand"
-                Text="Mis tareas 2"
-                TextColor="Yellow"
-                VerticalOptions="Center" />
-
-            <Label
-                FontSize="Small"
-                HorizontalOptions="CenterAndExpand"
-                Text="Mis tareas 3"
-                TextColor="Black"
+                VerticalOptions="Start">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" TextColor="Blue" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button
+                x:Name="Refresh"
+                Clicked="Refresh_Clicked"
+                HorizontalOptions="Center"
+                Text="Refrescar desde la web"
                 VerticalOptions="End" />
         </StackLayout>
     </ContentPage.Content>

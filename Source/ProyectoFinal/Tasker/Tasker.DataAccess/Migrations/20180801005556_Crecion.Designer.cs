@@ -7,21 +7,21 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tasker.DataAccess;
 
-namespace Tasker.Web.Migrations
+namespace Tasker.DataAccess.Migrations
 {
     [DbContext(typeof(TaskerDbContext))]
-    [Migration("20180714145304_PersonsTask")]
-    partial class PersonsTask
+    [Migration("20180801005556_Crecion")]
+    partial class Crecion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Tasker.Web.Models.MyTask", b =>
+            modelBuilder.Entity("Tasker.Models.MyTask", b =>
                 {
                     b.Property<int>("MyTaskId")
                         .ValueGeneratedOnAdd()
@@ -54,11 +54,15 @@ namespace Tasker.Web.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("Tasker.Web.Models.Person", b =>
+            modelBuilder.Entity("Tasker.Models.Person", b =>
                 {
                     b.Property<int>("PersonId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime?>("BirthDay");
 
                     b.Property<string>("Email");
 
@@ -73,7 +77,7 @@ namespace Tasker.Web.Migrations
                     b.ToTable("Person");
                 });
 
-            modelBuilder.Entity("Tasker.Web.Models.PersonTasks", b =>
+            modelBuilder.Entity("Tasker.Models.PersonTasks", b =>
                 {
                     b.Property<int>("MyTaskId");
 
@@ -87,7 +91,7 @@ namespace Tasker.Web.Migrations
                     b.ToTable("PersonTasks");
                 });
 
-            modelBuilder.Entity("Tasker.Web.Models.Project", b =>
+            modelBuilder.Entity("Tasker.Models.Project", b =>
                 {
                     b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd()
@@ -100,27 +104,27 @@ namespace Tasker.Web.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Tasker.Web.Models.MyTask", b =>
+            modelBuilder.Entity("Tasker.Models.MyTask", b =>
                 {
-                    b.HasOne("Tasker.Web.Models.Person", "CreatedBy")
+                    b.HasOne("Tasker.Models.Person", "CreatedBy")
                         .WithMany("CreatedByMe")
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Tasker.Web.Models.Project", "Project")
+                    b.HasOne("Tasker.Models.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Tasker.Web.Models.PersonTasks", b =>
+            modelBuilder.Entity("Tasker.Models.PersonTasks", b =>
                 {
-                    b.HasOne("Tasker.Web.Models.MyTask", "MyTask")
+                    b.HasOne("Tasker.Models.MyTask", "MyTask")
                         .WithMany("AssignedPerson")
                         .HasForeignKey("MyTaskId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Tasker.Web.Models.Person", "Person")
+                    b.HasOne("Tasker.Models.Person", "Person")
                         .WithMany("AssignedToMe")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
